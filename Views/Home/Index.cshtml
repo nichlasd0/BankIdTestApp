@@ -1,0 +1,99 @@
+﻿@model BankIdTestApp.Models.CollectResponse 
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+@if (ViewBag.Check == "true")
+{
+    <p>@Model.completionData.user.name</p>
+    <p>@Model.completionData.user.personalNumber</p>
+    <p>@Model.completionData.device.ipAddress</p>
+
+
+}
+
+@if (ViewBag.QRCodeImage != null)
+{
+
+    <img src="@ViewBag.QRCodeImage" alt="" style="height:150px;width:150px" />
+}
+@if (ViewBag.ThisDevice != null)
+{
+
+    <script>
+        window.onload = function funLoad() {
+            console.log("dingdong");
+            window.location = "@ViewBag.ThisDevice";
+        }
+    </script>
+}
+else
+{
+    @using (Html.BeginForm("ThisDevice", "Home", FormMethod.Post))
+    {
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th colspan="2" align="center">Sign in on this device</th>
+            </tr>
+            <tr>
+                <td>Personummer: </td>
+                <td>
+                    <input type="text" id="ssn" name="ssn">
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Submit" />
+                </td>
+            </tr>
+        </table>
+    }
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th colspan="2" align="center">Person Details</th>
+            </tr>
+            <tr>
+                <td>Personummer: </td>
+                <td>
+                    <input type="text" id="ssn" name="ssn">
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Submit" />
+                </td>
+            </tr>
+        </table>
+    }
+
+
+    @using (Html.BeginForm("QrCode", "Home", FormMethod.Post))
+    {
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th colspan="2" align="center">Sign in with QR</th>
+            </tr>
+            <tr>
+                <td>Personummer: </td>
+                <td>
+                    <input type="text" id="ssn" name="ssn">
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Submit" />
+                </td>
+            </tr>
+        </table>
+    }
+
+}
